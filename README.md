@@ -25,3 +25,13 @@ One thing I found different when modeling in Prisma compared with a document dat
 In Prisma with PostgreSQL, relationships are explicitly defined using foreign keys and relations. In MongoDB, related information can instead be embedded inside documents or connected using references.
 
 I found Prisma's relational approach useful because it helps maintain data consistency and makes relationships between books and genres easier to manage.
+
+## Prisma Implementation
+
+The database implementation is located in the `api` directory.
+
+- `api/prisma/schema.prisma` - Defines the Role enum, User, Genre, and Book models.
+- `api/prisma/seed.ts` - Seeds the database with four genres and sixteen books.
+- `api/src/prisma/prisma.service.ts` - Manages the Prisma database connection.
+- `api/.env.example` - Provides the DATABASE_URL environment variable template.
+- `api/prisma/migrations/` - Contains the database migration files.
