@@ -1,0 +1,49 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+datasource db {
+  provider = "postgresql"
+}
+
+// User roles
+enum Role {
+  PATRON
+  LIBRARIAN
+}
+
+// Users
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(PATRON)
+  createdAt DateTime @default(now())
+}
+
+// Book genres
+model Genre {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  books       Book[]
+}
+
+// Books
+model Book {
+  id              Int      @id @default(autoincrement())
+  title           String
+  author          String
+  isbn            String   @unique
+  description     String?
+  publishedYear   Int?
+  availableCopies Int      @default(1)
+
+  // Foreign key relationship
+  genreId Int
+  genre   Genre @relation(fields: [genreId], references: [id])
+
+  createdAt DateTime @default(now())
+}
